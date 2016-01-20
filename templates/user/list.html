@@ -1,0 +1,12 @@
+<md-content class="md-padding">
+    <p>
+      Click the button below to open the dialog with an autocomplete.
+    </p>
+
+    <md-button ng-click="create($event)" class="md-raised">Open Dialog</md-button>
+  </md-content>
+<div ng-repeat="user in users">
+	Name: {{user.name}}
+	Phone: {{user.phone}}
+	Address: {{user.address}}
+</div>

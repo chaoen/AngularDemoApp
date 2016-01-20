@@ -1,0 +1,12 @@
+{
+    "about": {
+        "url": "/about",
+        "parent": "root",
+        "templateUrl": "templates/about/about.html"
+    },
+    "home": {
+        "url": "/",
+        "parent": "root",
+        "templateUrl": "templates/home/home.html"
+    }
+}
