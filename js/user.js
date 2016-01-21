@@ -51,7 +51,6 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 					$http({
 						method:'GET', url:'http://localhost:8000/'+user.id+'/delete'})
 						.then(function(response) {
-							console.log(response);
 							$state.reload();
 							$mdToast.show(
 								$mdToast.simple()
@@ -88,7 +87,6 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 								data:Object.toparams(this.user),
 								headers: {'Content-Type':'application/x-www-form-urlencoded'}
 							}).then(function(response){
-								console.log(response.data);
 								$state.reload();
 								$mdToast.show(
 									$mdToast.simple()
@@ -145,7 +143,6 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 					data:Object.toparams(data),
 					headers: {'Content-Type':'application/x-www-form-urlencoded'}
 				}).then(function(response){
-					console.log(response.data);
 					$mdDialog.cancel();
 					$mdToast.show(
 						$mdToast.simple()
@@ -154,6 +151,5 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 					)
 					$state.reload();
 				})
-				console.log(data)
 			};
 	}])
