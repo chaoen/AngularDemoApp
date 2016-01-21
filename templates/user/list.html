@@ -1,12 +1,22 @@
 <md-content class="md-padding">
-    <p>
-      Click the button below to open the dialog with an autocomplete.
-    </p>
-
-    <md-button ng-click="create($event)" class="md-raised">Open Dialog</md-button>
+    <md-button ng-click="createDialog($event)" class="md-raised">Create User</md-button>
   </md-content>
 <div ng-repeat="user in users">
-	Name: {{user.name}}
-	Phone: {{user.phone}}
-	Address: {{user.address}}
+	<md-list-item class="md-3-line md-padding" ng-repeat"user in users">
+		<div class="md-list-item-text">
+			<h3>{{user.name}}</h3>
+			<h4>{{user.phone}}</h4>
+			<p>{{user.address}}</p>
+		</div>
+		<md-button ng-click="editDialog($event, user.id)" class="md-raised">Create User</md-button>
+		<md-button ng-click="editDialog($event, user.id)" class="md-ink-ripple" type="button">
+			<span class="ng-scope">Edit</span>
+			<div class="md-ripple-container"></div>
+		</md-button>
+		<md-button class="md-warn" type="button">
+			<span class="ng-scope">Delete</span>
+			<div class="md-riple-container"></div>
+		</md-button>
+		<md-divider inset></md-divider>
+	</md-list-item>
 </div>
