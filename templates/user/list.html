@@ -8,12 +8,11 @@
 			<h4>{{user.phone}}</h4>
 			<p>{{user.address}}</p>
 		</div>
-		<md-button ng-click="editDialog($event, user.id)" class="md-raised">Create User</md-button>
 		<md-button ng-click="editDialog($event, user.id)" class="md-ink-ripple" type="button">
 			<span class="ng-scope">Edit</span>
 			<div class="md-ripple-container"></div>
 		</md-button>
-		<md-button class="md-warn" type="button">
+		<md-button ng-click="destroyDialog($event, user)" class="md-warn" type="button">
 			<span class="ng-scope">Delete</span>
 			<div class="md-riple-container"></div>
 		</md-button>

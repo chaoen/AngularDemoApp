@@ -29,14 +29,38 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 	.controller('UserListController',['$scope',
 		'$mdDialog',
 		'$http',
-		function($scope, $mdDialog, $http) {
-			// $scope.user = null;
+		'$state',
+		'$mdToast',
+		function($scope, $mdDialog, $http, $state, $mdToast) {
 			$scope.URL = 'http://localhost:8000';
 			$http({
 				method:'GET', url:$scope.URL+'/users'}).
 				then(function(response){
 					$scope.users=response.data;
 				})
+
+			$scope.destroyDialog = function($event, user) {
+				var dialog = $mdDialog.confirm()
+						.title('Delete This User?')
+						.textContent('User Name:'+ user.name)
+						.targetEvent($event)
+						.ok('Sure')
+						.cancel('Cancel');
+
+				$mdDialog.show(dialog).then(function() {
+					$http({
+						method:'GET', url:'http://localhost:8000/'+user.id+'/delete'})
+						.then(function(response) {
+							console.log(response);
+							$state.reload();
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('Success')
+									.hideDelay(2000)	
+							)
+						})
+				})
+			}
 
 			$scope.editDialog = function($event, userId) {
 				$mdDialog.show({
@@ -65,9 +89,15 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 								headers: {'Content-Type':'application/x-www-form-urlencoded'}
 							}).then(function(response){
 								console.log(response.data);
+								$state.reload();
+								$mdToast.show(
+									$mdToast.simple()
+										.textContent('Success')
+										.hideDelay(2000)	
+								)
 								$mdDialog.cancel();
 							})
-						}
+						}						
 					},
 					templateUrl: 'templates/dialog/edit.html',
 					parent: angular.element(document.body),
@@ -88,26 +118,13 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
         }
 	}])
 
-	.controller('UserEditController', ['$timeout',
-		'$scope',
-		'$mdDialog',
-		'$http',
-		'$state',
-		function($timeout, $scope, $mdDailog, $http, $state) {
-			$scope.URL = 'http://localhost:8000';
-			// console.log(userId);
-			console.log($state);
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			}
-
-		}])
-
 	.controller('UserCreateController',['$timeout',
 		'$scope', 
 		'$mdDialog',
+		'$mdToast',
 		'$http',
-		function($timeout, $scope, $mdDialog, $http) {
+		'$state',
+		function($timeout, $scope, $mdDialog, $mdToast, $http, $state) {
 			$scope.URL = 'http://localhost:8000';
 			$scope.cancel = function() {
 				$mdDialog.cancel();
@@ -130,6 +147,12 @@ angular.module('usermodule', ['ui.router', 'Routing', 'ngMaterial', 'ngMessages'
 				}).then(function(response){
 					console.log(response.data);
 					$mdDialog.cancel();
+					$mdToast.show(
+						$mdToast.simple()
+							.textContent('Success')
+							.hideDelay(2000)	
+					)
+					$state.reload();
 				})
 				console.log(data)
 			};
