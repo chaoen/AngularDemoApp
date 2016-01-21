@@ -2,8 +2,6 @@
 
 angular.module('App', ['ui.router', 'Routing', 'usermodule', 'ngMaterial'])
 
-    .config()
-
     .config(function ($stateProvider, $urlRouterProvider, routerProvider) {
         $stateProvider
           .state('root', {
